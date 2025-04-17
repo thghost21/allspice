@@ -20,3 +20,9 @@ CREATE TABLE recipes(
 );
 
 SELECT * FROM recipes;
+SELECT
+    recipes.*,
+    accounts.*
+    FROM recipes
+    INNER JOIN accounts ON accounts.id = recipes.creator_id
+    WHERE recipes.id = LAST_INSERT_ID();"
