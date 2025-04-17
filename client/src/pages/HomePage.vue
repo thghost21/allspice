@@ -17,23 +17,23 @@ import RecipeCard from '@/components/RecipeCard.vue';
           </div>
         </div>
       </div>
-      <div class="col-md-4 text-center">
-        <div>
+      <div class="col-md-4 text-center my-3">
+        <div class="home-buttons">
           <div class="btn-group shadow " role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn fs-4 btn-outline-success " for="btnradio1">Home</label>
+            <label class="btn fs-4 btn-light btn-outline-success " for="btnradio1">Home</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn fs-4 btn-outline-success" for="btnradio2">My Recipes</label>
+            <label class="btn fs-4 btn-light btn-outline-success" for="btnradio2">My Recipes</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn fs-4 btn-outline-success" for="btnradio3">Favorites</label>
+            <label class="btn fs-4 btn-light btn-outline-success" for="btnradio3">Favorites</label>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 py-2">
         <RecipeCard />
       </div>
     </div>
