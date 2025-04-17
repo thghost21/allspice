@@ -1,6 +1,7 @@
 
 
 
+
 namespace allspice.Repositories;
 
 public class RecipesRepository
@@ -68,5 +69,40 @@ public class RecipesRepository
       return recipe;
     }, new { recipeId }).SingleOrDefault();
     return foundRecipe;
+  }
+
+  internal void UpdateRecipe(Recipe recipeToUpdate)
+  {
+    string sql = @"
+    UPDATE recipes
+    SET
+    title = @Title,
+    instructions = @Instructions,
+    img = @Img,
+    category = @Category
+    WHERE id = @Id
+    LIMIT 1;
+    ";
+
+    int rowsAffected = _db.Execute(sql, recipeToUpdate);
+    if (rowsAffected == 0)
+    {
+      throw new Exception("Update failed");
+    }
+    if (rowsAffected > 1)
+    {
+      throw new Exception("everything wrong with update");
+    }
+  }
+
+  internal void DeleteRecipe(int recipeId)
+  {
+    string sql = "DELETE FROM recipes WHERE id = @recipeId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { recipeId });
+    if (rowsAffected > 1)
+    {
+      throw new Exception("WHOOPS");
+    }
   }
 }

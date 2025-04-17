@@ -35,4 +35,31 @@ public class RecipesService
     }
     return recipe;
   }
+
+  internal Recipe UpdateRecipe(int recipeId, Account userInfo, Recipe recipeData)
+  {
+    Recipe recipeToUpdate = GetRecipeById(recipeId);
+    if (recipeToUpdate.CreatorId != userInfo.Id)
+    {
+      throw new Exception("you cant edit another users recipe");
+    }
+    recipeToUpdate.Category = recipeData.Category ?? recipeToUpdate.Category;
+    recipeToUpdate.Title = recipeData.Title ?? recipeToUpdate.Title;
+    recipeToUpdate.Instructions = recipeData.Instructions ?? recipeToUpdate.Instructions;
+    recipeToUpdate.Img = recipeData.Img ?? recipeToUpdate.Img;
+
+    _recipesRepository.UpdateRecipe(recipeToUpdate);
+    return recipeToUpdate;
+
+  }
+
+  internal void DeleteRecipe(Account userInfo, int recipeId)
+  {
+    Recipe recipe = GetRecipeById(recipeId);
+    if (recipe.CreatorId != userInfo.Id)
+    {
+      throw new Exception("You can not delete another users recipe");
+    }
+    _recipesRepository.DeleteRecipe(recipeId);
+  }
 }
