@@ -9,7 +9,6 @@ import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 
 const recipes = computed(() => AppState.recipes)
-
 onMounted(() => {
   getAllRecipes()
 })
@@ -29,7 +28,7 @@ async function getAllRecipes() {
 <template>
   <section class="container-fluid">
     <div class="row justify-content-center align-items-center">
-      <div class="col-12 bgImg d-flex flex-column align-items-center justify-content-center">
+      <div class="col-12 bgImg d-flex flex-column align-items-center justify-content-center shadow">
         <div class="d-flex ">
           <div class="">
             <h1 class="text-center">All-Spice</h1>
@@ -39,7 +38,7 @@ async function getAllRecipes() {
         </div>
       </div>
       <div class="col-md-4 text-center my-3">
-        <div class="home-buttons">
+        <div class="home-buttons  text-nowrap">
           <div class="btn-group shadow " role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
             <label class="btn fs-4 btn-light btn-outline-success " for="btnradio1">Home</label>
@@ -50,6 +49,9 @@ async function getAllRecipes() {
             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
             <label class="btn fs-4 btn-light btn-outline-success" for="btnradio3">Favorites</label>
           </div>
+          <div>
+            <button class="create-btn btn btn-success rounded-5 fs-3 mdi mdi-plus"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +60,7 @@ async function getAllRecipes() {
         <RecipeCard :recipe="recipe" />
       </div>
     </div>
-    <ModalComponent modalTitle="Recipe" modalId="recipeModal">
+    <ModalComponent modalId="recipeModal">
       <RecipeModal />
     </ModalComponent>
   </section>
@@ -71,5 +73,17 @@ async function getAllRecipes() {
   min-height: 45dvh;
   background-position: center;
   background-size: cover;
+}
+
+.home-buttons {
+  position: relative;
+  right: 0;
+  bottom: 39px;
+}
+
+.create-btn {
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
 }
 </style>

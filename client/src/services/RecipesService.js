@@ -4,6 +4,9 @@ import { Recipe } from "@/models/Recipe.js"
 import { AppState } from "@/AppState.js"
 
 class RecipesService {
+  getRecipeById() {
+    throw new Error('Method not implemented.')
+  }
   async getAllRecipes() {
     const response = await api.get('api/recipes')
     logger.log('getting recipes', response.data)

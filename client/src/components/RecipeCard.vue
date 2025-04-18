@@ -1,16 +1,24 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Recipe } from '@/models/Recipe.js';
-import RecipeModal from '@/components/RecipeModal.vue';
-import ModalComponent from '@/components/ModalComponent.vue';
+import { logger } from '@/utils/Logger.js';
 
 defineProps({
   recipe: { type: Recipe, required: true }
 })
+
+
+
+function setActiveRecipe(recipe) {
+  AppState.activeRecipe = recipe
+  logger.log(AppState.activeRecipe)
+
+}
 </script>
 
 
 <template>
-  <div role="button" type="button" data-bs-toggle="modal" data-bs-target="#recipeModal"
+  <div @click="setActiveRecipe(recipe)" role="button" type="button" data-bs-toggle="modal" data-bs-target="#recipeModal"
     class="recipe-card rounded d-flex flex-column justify-content-between mb-3 "
     :style="{ backgroundImage: `url(${recipe.img})` }">
     <div class="d-flex justify-content-between">
