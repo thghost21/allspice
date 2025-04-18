@@ -1,6 +1,8 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import ModalComponent from '@/components/ModalComponent.vue';
 import RecipeCard from '@/components/RecipeCard.vue';
+import RecipeModal from '@/components/RecipeModal.vue';
 import { recipeService } from '@/services/RecipesService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
@@ -56,7 +58,11 @@ async function getAllRecipes() {
         <RecipeCard :recipe="recipe" />
       </div>
     </div>
+    <ModalComponent modalTitle="Recipe" modalId="recipeModal">
+      <RecipeModal />
+    </ModalComponent>
   </section>
+
 </template>
 
 <style scoped lang="scss">

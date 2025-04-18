@@ -1,5 +1,7 @@
 <script setup>
 import { Recipe } from '@/models/Recipe.js';
+import RecipeModal from '@/components/RecipeModal.vue';
+import ModalComponent from '@/components/ModalComponent.vue';
 
 defineProps({
   recipe: { type: Recipe, required: true }
@@ -8,7 +10,7 @@ defineProps({
 
 
 <template>
-  <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  <div role="button" type="button" data-bs-toggle="modal" data-bs-target="#recipeModal"
     class="recipe-card rounded d-flex flex-column justify-content-between mb-3 "
     :style="{ backgroundImage: `url(${recipe.img})` }">
     <div class="d-flex justify-content-between">
@@ -19,6 +21,7 @@ defineProps({
       <span class="fs-4">{{ recipe.title }}</span>
     </div>
   </div>
+
 </template>
 
 
