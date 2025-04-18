@@ -1,16 +1,35 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import RecipeCard from '@/components/RecipeCard.vue';
+import { recipeService } from '@/services/RecipesService.js';
+import { logger } from '@/utils/Logger.js';
+import { Pop } from '@/utils/Pop.js';
+import { computed, onMounted } from 'vue';
+
+const recipes = computed(() => AppState.recipes)
+
+onMounted(() => {
+  getAllRecipes()
+})
 
 
-
+async function getAllRecipes() {
+  try {
+    await recipeService.getAllRecipes()
+  }
+  catch (error) {
+    Pop.error(error, "could not get recipes");
+    logger.error("Could not get recipes", error)
+  }
+}
 </script>
 
 <template>
   <section class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-12 bgImg flex-grow">
-        <div class="d-flex flex-fill flex-column align-items-center">
-          <div>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 bgImg d-flex flex-column align-items-center justify-content-center">
+        <div class="d-flex ">
+          <div class="">
             <h1 class="text-center">All-Spice</h1>
             <p class="fs-3 mb-0">Cherish Your Family</p>
             <p class="fs-3">And Their Cooking</p>
@@ -33,8 +52,8 @@ import RecipeCard from '@/components/RecipeCard.vue';
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 py-2">
-        <RecipeCard />
+      <div v-for="recipe in recipes" :key="recipe.id" class="col-md-4 py-2">
+        <RecipeCard :recipe="recipe" />
       </div>
     </div>
   </section>
