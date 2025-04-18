@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import CreateRecipeForm from '@/components/CreateRecipeForm.vue';
 import ModalComponent from '@/components/ModalComponent.vue';
 import RecipeCard from '@/components/RecipeCard.vue';
 import RecipeModal from '@/components/RecipeModal.vue';
@@ -40,17 +41,18 @@ async function getAllRecipes() {
       <div class="col-md-4 text-center my-3">
         <div class="home-buttons  text-nowrap">
           <div class="btn-group shadow " role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn fs-4 btn-light btn-outline-success " for="btnradio1">Home</label>
+            <input type="radio" class="btn-check" id="home" autocomplete="off" checked>
+            <label class="btn fs-4 btn-light btn-outline-success " for="home">Home</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn fs-4 btn-light btn-outline-success" for="btnradio2">My Recipes</label>
+            <input type="radio" class="btn-check" id="myRecipes" autocomplete="off">
+            <label class="btn fs-4 btn-light btn-outline-success" for="myRecipes">My Recipes</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn fs-4 btn-light btn-outline-success" for="btnradio3">Favorites</label>
+            <input type="radio" class="btn-check" id="favorites" autocomplete="off">
+            <label class="btn fs-4 btn-light btn-outline-success" for="favorites">Favorites</label>
           </div>
           <div>
-            <button class="create-btn btn btn-success rounded-5 fs-3 mdi mdi-plus"></button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#createModal"
+              class="create-btn btn btn-success rounded-5 fs-3 mdi mdi-plus"></button>
           </div>
         </div>
       </div>
@@ -62,6 +64,10 @@ async function getAllRecipes() {
     </div>
     <ModalComponent modalId="recipeModal">
       <RecipeModal />
+
+    </ModalComponent>
+    <ModalComponent modalId="createModal">
+      <CreateRecipeForm />
     </ModalComponent>
   </section>
 

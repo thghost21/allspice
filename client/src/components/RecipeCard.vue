@@ -19,7 +19,7 @@ function setActiveRecipe(recipe) {
 
 <template>
   <div @click="setActiveRecipe(recipe)" role="button" type="button" data-bs-toggle="modal" data-bs-target="#recipeModal"
-    class="recipe-card rounded d-flex flex-column justify-content-between mb-3 "
+    class="recipe-card shadow rounded d-flex flex-column justify-content-between mb-3 "
     :style="{ backgroundImage: `url(${recipe.img})` }">
     <div class="d-flex justify-content-between">
       <span class="bg-gray px-2 rounded m-1">{{ recipe.category }}</span>
