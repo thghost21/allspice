@@ -1,9 +1,27 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { recipeService } from '@/services/RecipesService.js';
+import { Pop } from '@/utils/Pop.js';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js';
 import { computed } from 'vue';
 
 
 const recipe = computed(() => AppState.activeRecipe)
+
+
+async function deleteRecipe(recipeId) {
+  try {
+    const confirmed = await Pop.confirm("are you sure?")
+    if (!confirmed) {
+      return
+    }
+    await recipeService.deleteRecipe(recipeId)
+    Modal.getOrCreateInstance('#recipeModal').hide()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 </script>
 
 
@@ -52,7 +70,11 @@ const recipe = computed(() => AppState.activeRecipe)
             </div>
           </div>
         </div>
-        <div class="text-end py-1 align-self-end col-12"><span>published by: {{ recipe.creator.name }}</span></div>
+        <div class="text-end py-1 align-self-end col-12 ">
+          <button @click="deleteRecipe(recipe.id)" title="Delete Recipe" class="btn btn-outline-red me-2">Delete
+            Recipe</button>
+          <span>published by: {{ recipe.creator.name }}</span>
+        </div>
       </div>
     </div>
   </section>
