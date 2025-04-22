@@ -54,7 +54,7 @@ async function deleteRecipe(recipeId) {
               </div>
               <div class="card-body">
                 <p class="card-text">{{ recipe.instructions }}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <button></button>
               </div>
             </div>
           </div>

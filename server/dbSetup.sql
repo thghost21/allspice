@@ -19,7 +19,31 @@ CREATE TABLE recipes(
   FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 
-SELECT * FROM recipes;
+CREATE TABLE ingredients(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  name VARCHAR(255) NOT NULL,
+  quantity VARCHAR(255) NOT NULL,
+  recipe_id INT NOT NULL,
+  Foreign Key (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
+)
+
+SELECT * FROM ingredients;
+
+INSERT INTO
+ingredients(name, quantity, recipe_id)
+VALUES(@Name, @quantity, @RecipeId)
+
+SELECT
+ingredients.*,
+recipes.*
+FROM ingredients
+INNER JOIN recipes ON recipe_id = ingredients.recipe_id
+WHERE ingredients.id = LAST_INSERT_ID();
+
+
+
 SELECT
     recipes.*,
     accounts.*
