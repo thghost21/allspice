@@ -26,10 +26,20 @@ CREATE TABLE ingredients(
   name VARCHAR(255) NOT NULL,
   quantity VARCHAR(255) NOT NULL,
   recipe_id INT NOT NULL,
-  Foreign Key (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
 )
 
-SELECT * FROM ingredients;
+CREATE TABLE favorites(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  recipe_id INT NOT NULL,
+  account_id VARCHAR(255) NOT NULL,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
+)
+
+SELECT * FROM favorites;
 
 INSERT INTO
 ingredients(name, quantity, recipe_id)
