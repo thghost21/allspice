@@ -49,4 +49,11 @@ SELECT
     accounts.*
     FROM recipes
     INNER JOIN accounts ON accounts.id = recipes.creator_id
-    WHERE recipes.id = LAST_INSERT_ID();"
+    WHERE recipes.id = LAST_INSERT_ID();
+
+    SELECT
+    ingredients.*,
+    recipes.*
+    FROM ingredients
+    INNER JOIN recipes ON recipes.id = ingredients.recipe_id
+    WHERE ingredients.recipe_id = 28;
