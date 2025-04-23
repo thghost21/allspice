@@ -1,5 +1,7 @@
 
 
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace allspice.Services;
 
 public class IngredientsService
@@ -28,5 +30,24 @@ public class IngredientsService
   {
     List<Ingredient> ingredients = _ingredientsRepository.GetIngredientsByRecipeId(recipeId);
     return ingredients;
+  }
+
+  private Ingredient GetIngredientById(int ingredientId)
+  {
+
+    Ingredient ingredient = _ingredientsRepository.GetIngredientsById(ingredientId);
+    if (ingredient == null)
+    {
+      throw new Exception("nope");
+    }
+    return ingredient;
+  }
+
+  internal void DeleteIngredient(int ingredientId, Account userInfo)
+  {
+    Ingredient ingredient = GetIngredientById(ingredientId);
+    // FIXME user info = creator check
+    _ingredientsRepository.DeleteIngredient(ingredientId);
+
   }
 }
